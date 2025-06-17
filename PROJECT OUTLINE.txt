@@ -1,0 +1,110 @@
+Scrabble with LLM Opponents - Project End Goal
+Ultimate Vision
+Build a web-based multiplayer Scrabble game where human players can compete against AI opponents powered by different LLMs (via OpenRouter API). The goal is to see what happens when various LLMs play Scrabble - whether they're surprisingly strategic or amusingly bad.
+Final Product Features
+
+Multiplayer rooms: Host creates room with shareable code, up to 3 humans + 1 AI player
+Real-time gameplay: Socket.io synchronization across all players
+LLM integration: AI players use OpenRouter API (Claude, GPT, etc.) to make moves
+Host-managed API keys: Room creator provides their OpenRouter key securely
+Complete Scrabble experience: Standard rules, scoring, word validation
+
+Three-Phase Development
+
+Phase 1 (Current): Core local Scrabble game with proper rules
+Phase 2: Add multiplayer networking and room system
+Phase 3: Integrate LLM opponents via OpenRouter
+
+## Core Concept
+- **Multiplayer Scrabble**: Real-time web-based game
+- **LLM Integration**: AI players powered by various LLMs via OpenRouter
+- **Room System**: Host creates room, shares code, players join
+- **API Key Management**: Room host provides their own OpenRouter API key
+
+## Technical Approach
+
+### Philosophy
+Keep it simple - we're building to see what happens when LLMs play Scrabble, not to create a tournament-grade AI. We're okay with the AI being either surprisingly good or amusingly bad at the game.
+
+### Recommended Stack
+- **Frontend**: React (or vanilla JS) with Canvas/SVG for the board
+- **Backend**: Node.js + Express
+- **Real-time**: Socket.io for multiplayer synchronization
+- **LLM Integration**: OpenRouter API
+
+## Implementation Phases
+
+### Phase 1: Core Scrabble Game (Local Only)
+**Goal**: Get a working Scrabble game before adding complexity
+
+**Requirements**:
+- 15x15 game board with multiplier squares
+- Proper tile distribution (100 tiles total)
+- Drag-and-drop tile placement
+- Score calculation with multipliers
+- Dictionary validation for words
+- Turn management
+- Basic UI for tile racks and scores
+
+**Key Data Structures**:
+```javascript
+const board = Array(15).fill(null).map(() => Array(15).fill(null));
+const tileBag = [/* proper Scrabble distribution */];
+const players = [{ tiles: [], score: 0 }, { tiles: [], score: 0 }];
+```
+
+### Phase 2: Multiplayer Support
+**Goal**: Allow multiple players to play together online
+
+**Requirements**:
+- Backend server setup
+- Socket.io integration
+- Room creation and joining via room codes
+- Game state synchronization
+- Turn management across network
+- Player connection handling
+
+### Phase 3: LLM Integration
+**Goal**: Add AI players powered by LLMs
+
+**Requirements**:
+- OpenRouter API integration
+- Secure API key handling (host's key, not exposed to other players)
+- Game state formatting for LLM input
+- Move parsing from LLM responses
+- Error handling for invalid moves (retry up to 3 times)
+
+## LLM Implementation Details
+
+### Simple Approach (Recommended)
+1. Send board state to LLM (either as ASCII representation or screenshot via vision model)
+2. Include player's available tiles
+3. Ask for move in format: "WORD, position (like H8), direction (across/down)"
+4. Validate the move, retry if invalid
+5. Apply move if valid, or use simple fallback after 3 failed attempts
+
+### Example LLM Prompt
+```
+Here's the Scrabble board: [board representation]
+Your tiles: A, E, I, N, R, S, T
+Place a valid word. Format: WORD, position (like H8), direction (across/down)
+```
+
+### No Over-Engineering
+- Don't pre-calculate all possible moves
+- Don't implement complex strategy systems
+- Let the LLM's natural capabilities shine (or fail entertainingly)
+- Different models might have different skill levels - that's a feature!
+
+## Key Decisions Made
+
+1. **Start Simple**: Build core game first, add features incrementally
+2. **LLM Approach**: Use straightforward prompting without heavy preprocessing
+3. **Error Tolerance**: Accept that LLM might make mistakes, handle gracefully
+4. **API Keys**: Host provides key, must be handled securely
+5. **Player Limit**: 3 humans + 1 AI maximum per room
+
+## Open Questions/Considerations
+
+1. **Board Representation**: ASCII text vs screenshot for vision models?
+2. **Dictionary Source**: Which word list to use for validation?

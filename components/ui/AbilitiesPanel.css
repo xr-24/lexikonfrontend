@@ -1,0 +1,356 @@
+.abilities-panel {
+  background: rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  border-radius: 12px;
+  margin-bottom: 15px;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+}
+
+.abilities-panel.expanded {
+  border-color: #ffd700;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+}
+
+.abilities-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.abilities-header:hover {
+  background: rgba(255, 215, 0, 0.1);
+}
+
+.abilities-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffd700;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.abilities-icon {
+  font-size: 1.3rem;
+}
+
+.abilities-counts {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.evocation-count,
+.intercession-count {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 4px 8px;
+  font-size: 0.9rem;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.evocation-count {
+  background: rgba(255, 215, 0, 0.2);
+  border-color: #ffd700;
+}
+
+.intercession-count {
+  background: rgba(76, 175, 80, 0.2);
+  border-color: #4caf50;
+}
+
+.expand-arrow {
+  color: #ffd700;
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.expand-arrow.expanded {
+  transform: rotate(180deg);
+}
+
+.abilities-content {
+  border-top: 1px solid rgba(255, 215, 0, 0.3);
+  padding: 15px;
+}
+
+.abilities-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.tab-button {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 8px 16px;
+  color: #cccccc;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.tab-button:hover {
+  border-color: #ffd700;
+  background: rgba(255, 215, 0, 0.1);
+}
+
+.tab-button.active {
+  background: rgba(255, 215, 0, 0.2);
+  border-color: #ffd700;
+  color: #ffd700;
+}
+
+.abilities-list {
+  min-height: 100px;
+}
+
+.evocations-grid,
+.intercessions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 12px;
+}
+
+.ability-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ability-card:hover:not(.disabled):not(.on-cooldown) {
+  border-color: #ffd700;
+  background: rgba(255, 215, 0, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+}
+
+.ability-card.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ability-card.on-cooldown {
+  opacity: 0.6;
+  cursor: not-allowed;
+  border-color: rgba(255, 107, 107, 0.5);
+}
+
+.ability-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ability-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.ability-card:hover:not(.disabled):not(.on-cooldown) .ability-image {
+  border-color: #ffd700;
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
+}
+
+.ability-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.ability-name {
+  color: #ffd700;
+  font-weight: bold;
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+
+.ability-description {
+  color: #cccccc;
+  font-size: 0.8rem;
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+
+.cooldown-indicator {
+  color: #ff6b6b;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.ability-pentagram {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 8px currentColor;
+}
+
+.cooldown-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: rgba(255, 107, 107, 0.8);
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+  border: 2px solid #ff6b6b;
+}
+
+.cooldown-text {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.no-abilities {
+  text-align: center;
+  color: #999999;
+  font-style: italic;
+  padding: 30px;
+  grid-column: 1 / -1;
+}
+
+.turn-warning {
+  background: rgba(255, 193, 7, 0.2);
+  border: 1px solid #ffc107;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  color: #ffc107;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+/* Evocation specific styles */
+.ability-card.evocation {
+  border-left: 4px solid #ffd700;
+}
+
+.ability-card.evocation:hover:not(.disabled) {
+  border-left-color: #ffed4e;
+}
+
+/* Intercession specific styles */
+.ability-card.intercession {
+  border-left: 4px solid #4caf50;
+}
+
+.ability-card.intercession:hover:not(.disabled):not(.on-cooldown) {
+  border-left-color: #66bb6a;
+}
+
+.ability-card.intercession.on-cooldown {
+  border-left-color: #ff6b6b;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .abilities-header {
+    padding: 10px 12px;
+  }
+
+  .abilities-title {
+    font-size: 1rem;
+  }
+
+  .abilities-content {
+    padding: 12px;
+  }
+
+  .abilities-tabs {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .tab-button {
+    padding: 10px 12px;
+    text-align: center;
+  }
+
+  .evocations-grid,
+  .intercessions-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .ability-card {
+    padding: 10px;
+    min-height: 70px;
+  }
+
+  .ability-icon {
+    font-size: 1.8rem;
+  }
+
+  .ability-name {
+    font-size: 0.9rem;
+  }
+
+  .ability-description {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .abilities-counts {
+    gap: 10px;
+  }
+
+  .evocation-count,
+  .intercession-count {
+    padding: 3px 6px;
+    font-size: 0.8rem;
+  }
+
+  .ability-card {
+    padding: 8px;
+    gap: 8px;
+    min-height: 60px;
+  }
+
+  .ability-icon {
+    font-size: 1.5rem;
+  }
+
+  .ability-name {
+    font-size: 0.85rem;
+  }
+
+  .ability-description {
+    font-size: 0.7rem;
+  }
+
+  .cooldown-overlay {
+    width: 25px;
+    height: 25px;
+    font-size: 0.8rem;
+  }
+}

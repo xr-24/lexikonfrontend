@@ -1,0 +1,346 @@
+.score-board {
+  background-color: #1a1a1a;
+  border: 1px solid #4A0000;
+  color: #E0E0E0;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 16px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  min-width: 250px;
+}
+
+.game-info {
+  text-align: center;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #8B0000;
+  padding-bottom: 16px;
+}
+
+.game-info h2 {
+  margin: 0 0 12px 0;
+  font-size: 24px;
+  color: #DC143C;
+  font-family: 'GothBallCrap', 'Arial', sans-serif;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.game-stats {
+  display: flex;
+  justify-content: space-around;
+  gap: 16px;
+  font-size: 14px;
+  font-family: 'OldLondon', 'Arial', sans-serif;
+}
+
+.game-stats span {
+  background-color: rgba(42, 42, 42, 0.8);
+  border: 1px solid #4A0000;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-family: 'OldLondon', 'Arial', sans-serif;
+}
+
+.players-scores h3 {
+  margin: 0 0 16px 0;
+  font-size: 18px;
+  color: #DC143C;
+  font-family: 'OldLondon', 'Arial', sans-serif;
+  text-align: center;
+  text-transform: lowercase;
+}
+
+.player-score {
+  background-color: rgba(42, 42, 42, 0.6);
+  border: 1px solid #333333;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 8px;
+  transition: all 0.2s ease;
+}
+
+.player-score.current-player {
+  background-color: rgba(0, 0, 0, 0.4);
+  border: 2px solid #FFD700;
+  transform: scale(1.02);
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+}
+
+.player-score.ai-player {
+  position: relative;
+  background: linear-gradient(135deg, #2a0000, #4a0000, #2a0000) !important;
+  border: 2px solid #8B0000 !important;
+  box-shadow: 
+    0 0 6px rgba(220, 20, 60, 0.4),
+    inset 0 0 6px rgba(139, 0, 0, 0.2);
+  animation: demonicBurn 4s ease-in-out infinite;
+}
+
+.player-score.ai-player.current-player {
+  border: 2px solid #DC143C !important;
+  box-shadow: 
+    0 0 12px rgba(220, 20, 60, 0.6),
+    inset 0 0 8px rgba(139, 0, 0, 0.3);
+  transform: scale(1.02);
+}
+
+/* Damage animations for ScoreBoard */
+.player-score.damage-player {
+  animation: scoreboardPlayerDamage 1.5s ease-in-out;
+}
+
+.player-score.damage-ai {
+  animation: scoreboardAIDamage 1.5s ease-in-out;
+}
+
+/* HP Bar flashing during damage */
+.player-score.damage-player .hp-bar-fill {
+  animation: scoreboardHPBarPlayerFlash 1.5s ease-in-out;
+}
+
+.player-score.damage-ai .hp-bar-fill {
+  animation: scoreboardHPBarAIFlash 1.5s ease-in-out;
+}
+
+@keyframes scoreboardHPBarPlayerFlash {
+  0%, 100% {
+    background-color: inherit !important;
+  }
+  25%, 75% {
+    background-color: #ff0000 !important;
+  }
+  50% {
+    background-color: #ffffff !important;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
+  }
+}
+
+@keyframes scoreboardHPBarAIFlash {
+  0%, 100% {
+    background-color: inherit !important;
+  }
+  25%, 75% {
+    background-color: #000000 !important;
+  }
+  50% {
+    background-color: #ffffff !important;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
+  }
+}
+
+@keyframes scoreboardPlayerDamage {
+  0%, 100% {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-color: #FFD700;
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+  }
+  25%, 75% {
+    background-color: rgba(255, 0, 0, 0.3);
+    border-color: #ff0000;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+  }
+  50% {
+    background-color: rgba(255, 255, 255, 0.4);
+    border-color: #ffffff;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+  }
+}
+
+@keyframes scoreboardAIDamage {
+  0%, 100% {
+    background: linear-gradient(135deg, #2a0000, #4a0000, #2a0000);
+    border-color: #8B0000;
+    box-shadow: 
+      0 0 6px rgba(220, 20, 60, 0.4),
+      inset 0 0 6px rgba(139, 0, 0, 0.2);
+  }
+  25%, 75% {
+    background: linear-gradient(135deg, #000000, #1a1a1a, #000000);
+    border-color: #000000;
+    box-shadow: 
+      0 0 15px rgba(0, 0, 0, 0.8),
+      inset 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+  50% {
+    background: linear-gradient(135deg, #1a1a1a, #333333, #1a1a1a);
+    border-color: #ffffff;
+    box-shadow: 
+      0 0 20px rgba(255, 255, 255, 0.9),
+      inset 0 0 15px rgba(255, 255, 255, 0.3);
+  }
+}
+
+.player-score.ai-player .player-name {
+  color: #E0E0E0 !important;
+  text-shadow: 
+    0 0 4px rgba(220, 20, 60, 0.6),
+    0 0 8px rgba(220, 20, 60, 0.3),
+    2px 2px 4px rgba(0, 0, 0, 0.8);
+  animation: burningText 3s ease-in-out infinite;
+}
+
+@keyframes demonicBurn {
+  0%, 100% {
+    box-shadow: 
+      0 0 4px rgba(220, 20, 60, 0.3),
+      0 0 8px rgba(255, 69, 0, 0.2),
+      inset 0 0 4px rgba(139, 0, 0, 0.2);
+  }
+  50% {
+    box-shadow: 
+      0 0 6px rgba(220, 20, 60, 0.4),
+      0 0 12px rgba(255, 69, 0, 0.3),
+      inset 0 0 6px rgba(139, 0, 0, 0.3);
+  }
+}
+
+@keyframes burningText {
+  0%, 100% {
+    text-shadow: 
+      0 0 3px rgba(220, 20, 60, 0.6),
+      0 0 6px rgba(220, 20, 60, 0.3),
+      2px 2px 4px rgba(0, 0, 0, 0.8);
+  }
+  50% {
+    text-shadow: 
+      0 0 4px rgba(255, 69, 0, 0.7),
+      0 0 8px rgba(220, 20, 60, 0.4),
+      2px 2px 4px rgba(0, 0, 0, 0.8);
+  }
+}
+
+.player-info {
+  margin-bottom: 8px;
+}
+
+.player-name-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  width: 100%;
+  position: relative;
+}
+
+.player-name {
+  font-weight: bold;
+  font-size: 36px;
+  font-family: 'OldLondon', 'Arial', sans-serif;
+  color: #E0E0E0;
+  text-align: center;
+}
+
+.ai-pentagram {
+  color: #8a2be2;
+  font-size: 16px;
+  margin-left: 8px;
+  position: relative;
+  top: -2px;
+}
+
+/* HP Bar Styles */
+.hp-bar-container {
+  margin-bottom: 8px;
+}
+
+.hp-bar-background {
+  position: relative;
+  width: 100%;
+  height: 20px;
+  background-color: rgba(42, 42, 42, 0.8);
+  border: 1px solid #4A0000;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.hp-bar-fill {
+  height: 100%;
+  border-radius: 10px;
+  position: relative;
+  z-index: 2;
+}
+
+.hp-bar-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.3;
+  border-radius: 10px;
+  filter: blur(4px);
+  z-index: 1;
+}
+
+.hp-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-family: 'OldLondon', 'Arial', sans-serif;
+  color: #E0E0E0;
+}
+
+.hp-current {
+  font-weight: bold;
+  color: #FFD700;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .score-board {
+    padding: 16px;
+    margin: 12px 0;
+    min-width: 200px;
+  }
+  
+  .game-info h2 {
+    font-size: 20px;
+  }
+  
+  .game-stats {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .game-stats span {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+  
+  .players-scores h3 {
+    font-size: 16px;
+  }
+  
+  .player-score {
+    padding: 10px;
+  }
+  
+  .player-name {
+    font-size: 28px;
+  }
+  
+  .hp-text {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .score-board {
+    padding: 12px;
+  }
+  
+  .game-info h2 {
+    font-size: 18px;
+  }
+  
+  .player-name {
+    font-size: 22px;
+  }
+  
+  .hp-text {
+    font-size: 16px;
+  }
+}

@@ -1,0 +1,194 @@
+.move-history {
+  background-color: #2a2a2a;
+  border: 1px solid #4A0000;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 300px;
+}
+
+.move-history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  background-color: #1a1a1a;
+  border-bottom: 1px solid #4A0000;
+  transition: background-color 0.2s ease;
+}
+
+.move-history-header:hover {
+  background-color: #333333;
+}
+
+.move-history-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: 'OldLondon', 'Arial', sans-serif;
+  color: #DC143C;
+  text-transform: lowercase;
+}
+
+.toggle-icon {
+  color: #DC143C;
+  font-size: 14px;
+  transition: transform 0.2s ease;
+}
+
+.move-history-content {
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.no-moves {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+  font-family: 'OldLondon', 'Arial', sans-serif;
+  padding: 20px;
+  margin: 0;
+}
+
+.moves-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.move-entry {
+  background-color: #1a1a1a;
+  border: 1px solid #333333;
+  border-radius: 6px;
+  padding: 10px;
+  transition: background-color 0.2s ease;
+}
+
+.move-entry:hover {
+  background-color: #333333;
+}
+
+.move-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.player-name {
+  font-weight: bold;
+  font-family: 'OldLondon', 'Arial', sans-serif;
+  color: #E0E0E0;
+  font-size: 14px;
+}
+
+.turn-number {
+  font-size: 12px;
+  color: #888;
+  font-family: 'OldLondon', 'Arial', sans-serif;
+}
+
+.move-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  font-family: 'OldLondon', 'Arial', sans-serif;
+}
+
+.words {
+  color: #DC143C;
+  font-weight: 500;
+}
+
+.damage {
+  color: #ff6b6b;
+  font-weight: bold;
+}
+
+.action {
+  color: #fbbf24;
+  font-style: italic;
+}
+
+.spell-name {
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.spell-name.evocation {
+  color: #8a2be2;
+}
+
+.spell-name.intercession {
+  color: #4caf50;
+}
+
+.spell-effect {
+  color: #cccccc;
+  font-style: italic;
+  font-size: 0.8rem;
+}
+
+.damage-dealt {
+  color: #ff4444;
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+
+/* Scrollbar styling */
+.move-history-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.move-history-content::-webkit-scrollbar-track {
+  background: #1a1a1a;
+  border-radius: 3px;
+}
+
+.move-history-content::-webkit-scrollbar-thumb {
+  background: #4A0000;
+  border-radius: 3px;
+}
+
+.move-history-content::-webkit-scrollbar-thumb:hover {
+  background: #DC143C;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .move-history {
+    max-width: 100%;
+  }
+  
+  .move-history-header {
+    padding: 10px 12px;
+  }
+  
+  .move-history-header h3 {
+    font-size: 14px;
+  }
+  
+  .move-history-content {
+    max-height: 250px;
+    padding: 6px;
+  }
+  
+  .move-entry {
+    padding: 8px;
+  }
+  
+  .player-name {
+    font-size: 13px;
+  }
+  
+  .turn-number {
+    font-size: 11px;
+  }
+  
+  .move-details {
+    font-size: 12px;
+  }
+}

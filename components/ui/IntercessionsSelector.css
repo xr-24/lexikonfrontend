@@ -1,0 +1,302 @@
+.intercessions-selector-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.intercessions-selector-modal {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  border: 2px solid #ffd700;
+  border-radius: 15px;
+  padding: 30px;
+  max-width: 1200px;
+  max-height: 95vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+}
+
+.intercessions-selector-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.intercessions-selector-header h2 {
+  color: #ffd700;
+  font-size: 2.2rem;
+  margin: 0 0 10px 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-family: 'OldLondon', serif;
+  display: block;
+  visibility: visible;
+  opacity: 1;
+  z-index: 10;
+  position: relative;
+}
+
+.intercessions-subtitle {
+  color: #cccccc;
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+}
+
+.selection-counter {
+  background: rgba(255, 215, 0, 0.2);
+  border: 1px solid #ffd700;
+  border-radius: 20px;
+  padding: 8px 16px;
+  display: inline-block;
+  font-weight: bold;
+  color: #ffd700;
+}
+
+.intercessions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.intercession-card {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.intercession-card:hover {
+  transform: translateY(-5px) scale(1.05);
+}
+
+.intercession-card.selected {
+  transform: translateY(-5px) scale(1.1);
+}
+
+.selection-number {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: #ffd700;
+  color: #000;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+
+.intercession-tooltip {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.95);
+  border: 2px solid #ffd700;
+  border-radius: 12px;
+  padding: 20px;
+  z-index: 20;
+  pointer-events: none;
+  max-width: 300px;
+  min-width: 250px;
+}
+
+.intercession-card:hover .intercession-tooltip {
+  opacity: 1;
+}
+
+.intercession-tooltip .intercession-name {
+  color: #ffd700;
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  text-transform: lowercase;
+}
+
+.intercession-tooltip .intercession-description {
+  color: #ffffff;
+  font-size: 1rem;
+  line-height: 1.4;
+  margin-bottom: 10px;
+  text-align: center;
+  font-weight: 400;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.intercession-tooltip .intercession-cooldown {
+  color: #ff6b6b;
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-align: center;
+  background: rgba(255, 107, 107, 0.2);
+  border-radius: 15px;
+  padding: 5px 10px;
+  margin: 0;
+}
+
+.intercessions-selector-footer {
+  border-top: 1px solid rgba(255, 215, 0, 0.3);
+  padding-top: 20px;
+}
+
+.selected-summary {
+  margin-bottom: 20px;
+}
+
+.selected-summary h4 {
+  color: #ffd700;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.selected-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.selected-item {
+  color: #cccccc;
+  font-size: 0.95rem;
+  padding: 5px 0;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.submit-button {
+  background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+  color: #000;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+}
+
+.submit-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #ffed4e 0%, #ffd700 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 215, 0, 0.4);
+}
+
+.submit-button:disabled {
+  background: #666;
+  color: #999;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.error-message {
+  background: rgba(255, 107, 107, 0.2);
+  border: 1px solid #ff6b6b;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 20px;
+  color: #ff6b6b;
+  text-align: center;
+  font-weight: bold;
+}
+
+.intercession-image {
+  width: 200px;
+  height: 280px;
+  object-fit: contain;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.intercession-card:hover .intercession-image {
+  filter: drop-shadow(0 8px 16px rgba(255, 215, 0, 0.4)) brightness(1.1);
+}
+
+.intercession-card.selected .intercession-image {
+  filter: drop-shadow(0 8px 20px rgba(255, 215, 0, 0.6)) brightness(1.2);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .intercessions-selector-modal {
+    margin: 20px;
+    padding: 20px;
+    max-height: 85vh;
+  }
+
+  .intercessions-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .intercessions-selector-header h2 {
+    font-size: 1.8rem;
+  }
+
+  .intercession-image {
+    width: 150px;
+    height: 210px;
+  }
+
+  .intercession-tooltip {
+    max-width: 250px;
+    min-width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .intercessions-selector-modal {
+    margin: 10px;
+    padding: 15px;
+  }
+
+  .intercessions-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .intercession-image {
+    width: 120px;
+    height: 168px;
+  }
+
+  .intercession-tooltip {
+    max-width: 200px;
+    min-width: 180px;
+    padding: 15px;
+  }
+
+  .intercession-tooltip .intercession-name {
+    font-size: 1.2rem;
+  }
+
+  .intercession-tooltip .intercession-description {
+    font-size: 0.9rem;
+  }
+}

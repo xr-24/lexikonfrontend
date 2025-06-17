@@ -1,0 +1,262 @@
+.room-creation {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-family: 'OldLondon', 'Arial', sans-serif;
+  text-transform: lowercase;
+}
+
+.room-creation-container {
+  max-width: 400px;
+  width: 100%;
+}
+
+.room-creation h1 {
+  text-align: center;
+  color: #DC143C;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  font-family: 'GothBallCrap', inherit;
+}
+
+.room-creation-card {
+  background-color: #2a2a2a;
+  border: 1px solid #4A0000;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+  margin-bottom: 1rem;
+  backdrop-filter: blur(10px);
+}
+
+.room-creation-card h2 {
+  text-align: center;
+  color: #E0E0E0;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-family: 'OldLondon', inherit;
+}
+
+.input-group {
+  margin-bottom: 1.5rem;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #E0E0E0;
+  font-weight: 500;
+  font-family: 'OldLondon', inherit;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #4A0000;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: 'OldLondon', inherit;
+  background-color: #2a2a2a;
+  color: #E0E0E0;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #DC143C;
+  box-shadow: 0 0 0 3px rgba(220, 20, 60, 0.3);
+}
+
+.input-group input::placeholder {
+  color: #888;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 1rem;
+}
+
+.create-room-btn {
+  width: 100%;
+  padding: 14px;
+  background-color: #8B0000;
+  color: #E0E0E0;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  font-family: 'OldLondon', inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.solo-play-btn {
+  width: 100%;
+  padding: 14px;
+  background-color: #4A0000;
+  color: #E0E0E0;
+  border: 1px solid #8B0000;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  font-family: 'OldLondon', inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.solo-play-btn:hover:not(:disabled) {
+  background-color: #8B0000;
+  border-color: #DC143C;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(220, 20, 60, 0.4);
+}
+
+.solo-play-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.solo-play-btn:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.solo-play-btn:disabled:hover {
+  background-color: #6c757d;
+  transform: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.create-room-btn:hover:not(:disabled) {
+  background-color: #B22222;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(220, 20, 60, 0.4);
+}
+
+.create-room-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.create-room-btn:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.create-room-btn:disabled:hover {
+  background-color: #6c757d;
+  transform: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.divider {
+  text-align: center;
+  margin: 1.5rem 0;
+  position: relative;
+}
+
+.divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #4A0000;
+}
+
+.divider span {
+  background: #2a2a2a;
+  padding: 0 1rem;
+  color: #888;
+  font-size: 0.9rem;
+  font-family: 'OldLondon', inherit;
+}
+
+.join-room-btn {
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  color: #DC143C;
+  border: 2px solid #DC143C;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: 'OldLondon', inherit;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.join-room-btn:hover {
+  background: #DC143C;
+  color: #E0E0E0;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(220, 20, 60, 0.3);
+}
+
+.join-room-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.error-message {
+  background: rgba(220, 20, 60, 0.1);
+  color: #DC143C;
+  padding: 12px;
+  border-radius: 6px;
+  margin: 1rem 0;
+  border: 1px solid #DC143C;
+  font-size: 0.9rem;
+  font-family: 'OldLondon', inherit;
+}
+
+.connection-status {
+  text-align: center;
+  color: #E0E0E0;
+  font-size: 0.9rem;
+  opacity: 0.9;
+  font-family: 'OldLondon', inherit;
+}
+
+.status-connected {
+  color: #4ade80;
+}
+
+.status-connecting {
+  color: #fbbf24;
+}
+
+.status-error {
+  color: #f87171;
+}
+
+.status-disconnected {
+  color: #9ca3af;
+}
+
+@media (max-width: 480px) {
+  .room-creation {
+    padding: 10px;
+  }
+  
+  .room-creation h1 {
+    font-size: 2rem;
+  }
+  
+  .room-creation-card {
+    padding: 1.5rem;
+  }
+}

@@ -1,0 +1,66 @@
+Project Structure (Updated with Security Enhancements):
+
+🔒 = Security Updated
+🆕 = New Security File
+
+Frontend:
+- src/
+  - main.tsx: Entry point of the React application.
+  - App.tsx: Main application component.
+  - index.css: Global styles.
+  - services/: Contains services like socketService and soundService.
+    - socketService.ts 🔒: Socket communication with client-side validation
+    - soundService.ts: Audio effects management
+  - store/: Contains the gameStore.
+    - gameStore.ts: Zustand store for game state management
+  - App.css
+- components/
+  - GameContainer.tsx: Main game container component.
+  - room/: Contains components related to room creation and joining.
+    - RoomCreation.tsx: Room creation interface
+    - RoomJoining.tsx: Room joining interface  
+    - Lobby.tsx: Pre-game lobby interface
+  - common/: Contains common components.
+  - ui/: Contains UI components.
+  - ErrorBoundary.tsx: Error boundary wrapper
+- features/
+  - chat/: Contains chat-related components and types.
+  - game-board/: Contains game board components, services, and constants.
+    - components/GameBoard.tsx: Interactive game board
+    - constants/board.ts: Board layout and multipliers
+    - services/: Board-related services
+  - game-history/: Contains move history components.
+  - scoring/: Contains scoring components and services.
+  - tile-system/: Contains tile system components, constants, and services.
+    - components/: Tile-related UI components
+    - constants/tiles.ts: Tile distribution and values
+    - services/: Tile management services
+- public/: Contains static assets.
+- index.html: Main HTML file.
+- vite.config.ts: Vite configuration file.
+- tsconfig.json: TypeScript configuration file.
+- package.json: Project dependencies and scripts.
+
+Backend (scrabble-backend):
+- src/
+  - server.ts 🔒: Entry point with connection limiting and security middleware
+  - events/: Contains event handlers for game and room events.
+    - roomEvents.ts 🔒: Room management with input validation and rate limiting
+    - gameEvents.ts 🔒: Game actions with server-side validation and ownership checks
+  - services/: Contains services like GameService, RoomManager, dictionaryService, etc.
+    - GameService.ts 🔒: Core game logic with tile ownership validation
+    - RoomManager.ts: Room creation and management
+    - dictionaryService.ts: Word validation service
+    - moveManager.ts: Move processing and validation
+    - PowerUpManager.ts: Power-up system management
+    - scoreCalculator.ts: Scoring calculations
+    - wordValidator.ts: Word formation validation
+    - validation.ts 🆕: Input validation and sanitization utilities
+  - types/: Contains TypeScript types for game and room.
+    - game.ts: Game-related type definitions
+    - room.ts: Room-related type definitions
+  - constants/: Contains constants for board and tiles.
+    - board.ts: Board layout and power-up definitions
+    - tiles.ts: Tile distribution and bag creation
+- package.json 🔒: Updated with security dependencies (validator, dompurify, jsdom)
+- tsconfig.json: TypeScript configuration file.

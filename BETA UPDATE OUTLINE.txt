@@ -1,0 +1,160 @@
+My next major game update I want to include the following updates. Main game logic: Instead of the game continuing until all tiles are gone, and tracking points the normal scrabble way (an ascending linear amount), I want to convert the points system to a per-player HP system. So, essentially, scoring logic will be reversed. Players will start with 200 HP and every word the opponent spells will REMOVE that amount of points (HP). Multiplayer lobbies with more than 2 players will use the old scoring logic (Party Mode). 
+
+Then, I want to REWORK the powerup system entirely. Instead of being POWERUPS that appear on your tile rack as a tile with an emoji, they will be EVOCATIONS that are added to a small area we designate on the tile rack. The INVOCATIONS will all use the same icon (a scroll with a pentagram) but with different colors for the pentagram.
+
+
+FINALLY, I want to add two slots for "Intercessions" that players choose BEFORE they start their game. Intercessions are similar to EVOCATIONS except they are cooldown based rather than consumable, and the player starts with them.
+
+
+
+1.) New HP-based scoring mode needed
+The current code only tracks ascending scores in Player.score and ends the game when all players call end or tiles are used. Lines in GameService.commitMove add points to the active player without considering HP reduction
+. Also, GameState has no concept of game mode or hit points
+
+
+* Modify `src/types/game.ts`:
+
+  * Extend `Player` with `hp: number`.
+  * Add a `mode: 'HP' | 'PARTY'` (or similar) field to `GameState`.
+* Update `GameService.initializeGame` to set `hp` to `200` when mode is `'HP'`.
+* Adjust `RoomManager.startGame` to choose `'HP'` mode when the room has exactly two players; otherwise keep legacy scoring (`'PARTY'`).
+* Update `GameService.commitMove`:
+
+  * When mode is `'HP'`, subtract `moveResult.score.totalScore` from the opponent’s `hp` instead of adding to `score`.
+  * Check for `hp <= 0` and call `checkGameEnd`.
+* Update `checkGameEnd` to finish the game when any player’s `hp` is `0` in HP mode, still using the existing logic for `'PARTY'`.
+
+
+2.) Power-ups currently appear as tiles
+The system stores power-ups as tile objects and hands them out through collectPowerUpFromBoard etc.
+. The update requires “Invocations” stored in a separate area instead of as tiles.
+
+* Add new interfaces `Invocation` and `Intercession` in `src/types/game.ts`.
+* Extend `Player` with `invocations: Invocation[]` and `intercessions: Intercession[]`.
+* Change `PowerUpManager.collectPowerUpFromBoard` so collected board items are appended to `player.invocations` rather than converted into special tiles.
+* Remove or adapt functions like `createPowerUpTile` in `src/constants/tiles.ts`; board power-ups should grant an Invocation directly.
+* Update `GameService.commitMove` to call the new collection logic when a tile covers a board power-up.
+* Modify relevant Socket.io events (e.g., `activate-powerup`/`activate-powerup-tile`) to operate on `invocations` instead of tiles.
+
+3.) Intercession slots with cooldowns
+There is no representation of cooldown abilities chosen before the game.
+
+* Define `Intercession` type in `src/types/game.ts` with properties such as `id`, `cooldown`, and `currentCooldown`.
+* Update `RoomManager.startGame` to accept each player’s chosen intercessions (two per player) before calling `GameService.initializeGame`.
+* Add helper methods in `PowerUpManager` (or new module) to trigger an intercession and manage its cooldown.
+* Expose new Socket.io events for activating an intercession and for notifying clients when cooldowns update.
+
+4.) Board power-ups still described as PowerUp objects
+Since “Evocations” replace power-up tiles, board generation must be aligned.
+
+* Rename `POWER_UP_DEFINITIONS` in `src/constants/board.ts` to reflect evocation data.
+* Ensure `createEmptyBoard` places these invocation pickups on the board, but players receive them as `Evocation` items (see task 2).
+* Remove emoji-specific tile generation where no longer required.
+
+
+List of Intercessions and Evocations to Start
+
+Invocation of Orobas
+
+(Orobas reveals past, present, and future; grants wisdom)
+
+    Allows unlimited reuse of letters from your rack for one turn.
+
+Invocation of Bune
+
+(Bune changes the places of the dead; grants wealth and renewal)
+
+    Discard your current rack and draw a fresh one, guaranteed vowels.
+
+Invocation of Gremory
+
+(Gremory manipulates affections, treasures, and trades positions)
+
+    Swap racks entirely with your opponent.
+
+Invocation of Astaroth
+
+(Astaroth grants hidden knowledge and secret powers)
+
+    Adds one temporary wildcard tile (blank) to your rack.
+
+Invocation of Aim
+
+(Aim wields fire, causing destruction)
+
+    Force your opponent to discard two tiles from their rack.
+
+Invocation of Andromalius
+
+(Andromalius is known for discovering and punishing thieves)
+
+    Steal one tile from your opponent’s rack to use on your turn.
+
+Invocation of Valefor
+
+(Valefor tempts others to commit theft, subtly stealing)
+
+    Steal a double or triple word multiplier from the board for your own use.
+
+Invocation of Dantalion
+
+(Dantalion can duplicate thoughts, images, and faces)
+
+    Duplicate one tile in your rack.
+Invocation of Furfur
+
+(Furfur causes storms, chaos, and rapid upheavals)
+
+    Immediately take an additional turn after your current one.
+
+Invocation of Forneus
+
+(Forneus teaches rhetoric and can freeze or solidify arguments)
+
+    Freeze a tile on the board, preventing opponents from building on it next turn.
+
+Invocation of Murmur
+
+(Murmur binds spirits and silences souls)
+
+    Lock three random opponent tiles, preventing their use next turn.
+
+Invocation of Haagenti
+
+(Haagenti provides abundance, turning base metals into valuable ones)
+
+    Temporarily expand your rack to 10 tiles for your current turn.
+	
+	
+These all use existing Powerup logic. The Intercessions will need to use new logic.
+
+Intercessions:
+
+Judgement of Michael (Cooldown: 3 turns)
+Directly inflicts 30 damage to the enemy’s HP.
+
+Wrath of Samael (Cooldown: 4 turns)
+Your next word played deals double damage to the enemy.
+
+Benediction of Raphael (Cooldown: 4 turns)
+Restores 50 HP to yourself.
+
+Protection of Uriel (Cooldown: 3 turns)
+Reduces damage received by 50% during opponent's next turn.
+
+Insight of Gabriel (Cooldown: 5 turns)
+Automatically plays your highest-scoring possible word.
+
+Clarity of Raziel (Cooldown: 4 turns)
+Highlights up to 3 of your possible moves
+
+Intercession of Metatron (Cooldown: 6 turns)
+Restore 100 HP to yourself.
+
+
+
+
+
+
+
+

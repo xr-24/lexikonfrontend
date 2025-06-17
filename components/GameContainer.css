@@ -1,0 +1,495 @@
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+  padding: 20px;
+  font-family: 'OldLondon', 'Arial', sans-serif;
+  text-transform: lowercase;
+}
+
+.game-main {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  justify-content: center;
+  width: 100%;
+}
+
+.game-board-section {
+  display: flex;
+  justify-content: center;
+}
+
+.game-sidebar-left,
+.game-sidebar-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 250px;
+  max-width: 300px;
+  flex-shrink: 0;
+}
+
+.game-sidebar-left {
+  align-items: flex-end;
+}
+
+.game-sidebar-right {
+  align-items: flex-start;
+}
+
+
+/* Move Errors Display */
+.move-errors {
+  background-color: rgba(220, 20, 60, 0.1);
+  border: 1px solid #DC143C;
+  border-radius: 8px;
+  padding: 12px;
+  color: #DC143C;
+}
+
+.move-errors h4 {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: 'OldLondon', inherit;
+}
+
+.move-errors ul {
+  margin: 0;
+  padding-left: 16px;
+  list-style-type: disc;
+}
+
+.error-message {
+  font-size: 12px;
+  margin-bottom: 4px;
+  font-family: 'OldLondon', inherit;
+}
+
+/* Last Move Result Display */
+.last-move-result {
+  background-color: rgba(139, 0, 0, 0.1);
+  border: 1px solid #8B0000;
+  border-radius: 8px;
+  padding: 12px;
+  color: #DC143C;
+}
+
+.last-move-result h4 {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: 'OldLondon', inherit;
+}
+
+.score-breakdown {
+  font-size: 12px;
+  font-family: 'OldLondon', inherit;
+}
+
+.score-breakdown p {
+  margin: 4px 0;
+}
+
+.word-score {
+  margin: 2px 0;
+  font-size: 11px;
+  font-family: 'OldLondon', inherit;
+}
+
+.word-score span {
+  display: block;
+}
+
+.player-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Game Setup Styles */
+.game-setup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+  color: #E0E0E0;
+  padding: 20px;
+}
+
+.game-setup h1 {
+  font-size: 48px;
+  margin-bottom: 40px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  color: #DC143C;
+  font-family: 'OldLondon', inherit;
+}
+
+.setup-form {
+  background-color: rgba(42, 42, 42, 0.8);
+  border: 1px solid #4A0000;
+  border-radius: 12px;
+  padding: 40px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+}
+
+.player-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.player-input {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.player-input label {
+  font-weight: bold;
+  min-width: 80px;
+  font-size: 16px;
+  font-family: 'OldLondon', inherit;
+  color: #E0E0E0;
+}
+
+.player-input input {
+  padding: 10px 15px;
+  border: 1px solid #4A0000;
+  border-radius: 6px;
+  font-size: 16px;
+  font-family: 'OldLondon', inherit;
+  background-color: #2a2a2a;
+  color: #E0E0E0;
+  min-width: 200px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.player-input input:focus {
+  outline: none;
+  border-color: #DC143C;
+  box-shadow: 0 0 0 3px rgba(220, 20, 60, 0.3);
+}
+
+.start-button {
+  background-color: #8B0000;
+  color: #E0E0E0;
+  border: none;
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: 'OldLondon', inherit;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  width: 100%;
+}
+
+.start-button:hover {
+  background-color: #B22222;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(220, 20, 60, 0.4);
+}
+
+.start-button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .game-main {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .game-sidebar-left,
+  .game-sidebar-right {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    min-width: auto;
+    max-width: none;
+    align-items: center;
+  }
+  
+  .players-section {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 1024px) {
+  .players-section {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .game-container {
+    padding: 10px;
+  }
+  
+  .game-main {
+    gap: 10px;
+  }
+  
+  .game-sidebar-left,
+  .game-sidebar-right {
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+    align-items: center;
+  }
+  
+  .game-setup h1 {
+    font-size: 36px;
+    margin-bottom: 30px;
+  }
+  
+  .setup-form {
+    padding: 30px 20px;
+    width: 90%;
+    max-width: 400px;
+  }
+  
+  .player-input {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .player-input label {
+    min-width: auto;
+  }
+  
+  .player-input input {
+    width: 100%;
+    min-width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-setup h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  
+  .setup-form {
+    padding: 20px 15px;
+  }
+  
+  .player-inputs {
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .start-button {
+    padding: 12px 20px;
+    font-size: 16px;
+  }
+}
+
+/* New styles for updated game container */
+.players-section {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 24px;
+  max-width: 1200px;
+  flex-wrap: wrap;
+}
+
+.current-turn {
+  background-color: rgba(220, 20, 60, 0.1);
+  border: 1px solid #DC143C;
+  border-radius: 8px;
+  padding: 12px;
+  color: #DC143C;
+  text-align: center;
+}
+
+.current-turn h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: 'OldLondon', inherit;
+}
+
+.game-finished {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  background-color: rgba(42, 42, 42, 0.8);
+  border: 1px solid #4A0000;
+  border-radius: 12px;
+  padding: 40px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+  color: #E0E0E0;
+  text-align: center;
+}
+
+.game-finished h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  color: #DC143C;
+  font-family: 'OldLondon', inherit;
+}
+
+.game-finished h2 {
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: #8B0000;
+  font-family: 'OldLondon', inherit;
+}
+
+.final-scores {
+  margin-bottom: 30px;
+}
+
+.final-scores h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #E0E0E0;
+  font-family: 'OldLondon', inherit;
+}
+
+.final-score {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(42, 42, 42, 0.6);
+  border: 1px solid #4A0000;
+  border-radius: 8px;
+  padding: 12px 20px;
+  margin-bottom: 8px;
+  min-width: 300px;
+}
+
+.final-score .rank {
+  font-weight: bold;
+  color: #DC143C;
+  min-width: 40px;
+  font-family: 'OldLondon', inherit;
+}
+
+.final-score .player-name {
+  flex: 1;
+  text-align: left;
+  margin-left: 16px;
+  font-family: 'OldLondon', inherit;
+}
+
+.final-score .score {
+  font-weight: bold;
+  color: #8B0000;
+  min-width: 60px;
+  text-align: right;
+  font-family: 'OldLondon', inherit;
+}
+
+.new-game-button {
+  background-color: #8B0000;
+  color: #E0E0E0;
+  border: none;
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: 'OldLondon', inherit;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.new-game-button:hover {
+  background-color: #B22222;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(220, 20, 60, 0.4);
+}
+
+
+
+@media (max-width: 768px) {
+  .players-section {
+    gap: 12px;
+  }
+  
+  .game-finished {
+    padding: 30px 20px;
+  }
+  
+  .game-finished h1 {
+    font-size: 36px;
+  }
+  
+  .game-finished h2 {
+    font-size: 24px;
+  }
+  
+  .final-scores h3 {
+    font-size: 20px;
+  }
+  
+  .final-score {
+    min-width: 250px;
+    padding: 10px 16px;
+  }
+}
+
+/* Multiplayer UI Styles */
+.game-controls button.disabled {
+  background-color: #6c757d !important;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.game-controls button.disabled:hover {
+  background-color: #6c757d !important;
+  transform: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.leave-game-btn {
+  background-color: #dc3545 !important;
+  margin-top: 10px;
+}
+
+.leave-game-btn:hover {
+  background-color: #c82333 !important;
+}
+
+.your-turn {
+  color: #28a745;
+  font-weight: bold;
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.waiting-turn {
+  color: #ffc107;
+  font-style: italic;
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.current-turn p {
+  margin: 5px 0;
+  font-family: 'OldLondon', inherit;
+}

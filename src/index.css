@@ -1,0 +1,153 @@
+/* FONT FIX UPDATE - Cache Bust v2.0 */
+@font-face {
+  font-family: 'GothBallCrap';
+  src: url('../GothBallCrap.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OldLondon';
+  src: url('../OldLondon.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'OldLondon', 'Arial', sans-serif;
+  line-height: 1.5;
+  color: #E0E0E0;
+  background-color: #0a0a0a;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+button {
+  font-family: 'OldLondon', inherit;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+button:focus {
+  outline: 2px solid #DC143C;
+  outline-offset: 2px;
+}
+
+input {
+  font-family: 'OldLondon', inherit;
+  outline: none;
+}
+
+input:focus {
+  outline: 2px solid #DC143C;
+  outline-offset: 2px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: bold;
+  font-family: 'OldLondon', inherit;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* FORCE FONT OVERRIDE - CRITICAL FIX */
+* {
+  font-family: 'OldLondon', 'Arial', sans-serif !important;
+}
+
+/* Only tiles and main titles should use GothBallCrap */
+.tile-letter,
+.rack-tile .tile-letter,
+.board-tile .tile-letter,
+.letter-text,
+.tile-value,
+.rack-tile .tile-value,
+.board-tile .tile-value,
+.letter-value,
+h1.main-title,
+.game-title,
+.lexikon-title,
+.scoreboard h2,
+.room-creation h1,
+.room-joining h1,
+.lobby h1 {
+  font-family: 'GothBallCrap', 'Arial', sans-serif !important;
+}
+
+/* Ensure all UI elements use OldLondon */
+button,
+input,
+label,
+p,
+span,
+div,
+.player-name,
+.score,
+.action-button,
+.rack-header h3,
+.abilities-container *,
+.current-turn *,
+.move-errors *,
+.last-move-result * {
+  font-family: 'OldLondon', 'Arial', sans-serif !important;
+}
+
+/* FONT SIZE INCREASES */
+.player-name {
+  font-size: 20px !important;
+  font-weight: bold !important;
+}
+
+.action-button {
+  font-size: 16px !important;
+  font-weight: bold !important;
+}
+
+.rack-header h3 {
+  font-size: 22px !important;
+}
+
+.score {
+  font-size: 18px !important;
+  font-weight: bold !important;
+}
+
+.current-turn h4 {
+  font-size: 18px !important;
+}
+
+.current-turn p {
+  font-size: 16px !important;
+}
+
+/* Specific button text increases */
+button {
+  font-size: 16px !important;
+  font-weight: bold !important;
+}
+
+/* Player rack buttons specifically */
+.primary-actions .action-button,
+.secondary-actions .action-button {
+  font-size: 18px !important;
+  padding: 12px 20px !important;
+}
+
+/* Score display */
+.player-score,
+.final-score .score {
+  font-size: 24px !important;
+  font-weight: bold !important;
+}
