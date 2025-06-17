@@ -16,6 +16,7 @@ interface RoomState {
   connectionStatus: 'disconnected' | 'connecting' | 'connected' | 'error';
   error: string | null;
   isSoloMode: boolean;
+  intercessionSelectionStarted: boolean;
 }
 
 // UI state for multiplayer
@@ -134,6 +135,7 @@ const initialRoomState: RoomState = {
   connectionStatus: 'disconnected',
   error: null,
   isSoloMode: false,
+  intercessionSelectionStarted: false,
 };
 
 const initialUIState: UIState = {
@@ -183,6 +185,7 @@ export const useGameStore = create<GameStore>((set, get) => {
         playerId: currentPlayer?.id || null,
         isHost: true,
         uiPhase: 'LOBBY',
+        intercessionSelectionStarted: data.room.intercessionSelectionStarted ?? false,
         roomPlayers: data.room.players.map((p: any) => ({
           id: p.id,
           name: p.name,
@@ -203,6 +206,7 @@ export const useGameStore = create<GameStore>((set, get) => {
         playerId: currentPlayer?.id || null,
         isHost: false,
         uiPhase: 'LOBBY',
+        intercessionSelectionStarted: data.room.intercessionSelectionStarted ?? false,
         roomPlayers: data.room.players.map((p: any) => ({
           id: p.id,
           name: p.name,
@@ -216,6 +220,7 @@ export const useGameStore = create<GameStore>((set, get) => {
 
   socket.on('room-updated', (room: any) => {
     set({
+      intercessionSelectionStarted: room.intercessionSelectionStarted ?? false,
       roomPlayers: room.players.map((p: any) => ({
         id: p.id,
         name: p.name,
