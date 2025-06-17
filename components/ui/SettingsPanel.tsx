@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useGameStore } from '../../src/store/gameStore';
 import { soundService } from '../../src/services/soundService';
 import './SettingsPanel.css';
@@ -29,6 +29,9 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
   
   const currentPlayer = getCurrentPlayer();
   const currentTileColor = playerTileColor || currentPlayer?.tileColor || '#8B4513';
+
+  const [soundEnabled, setSoundEnabled] = useState(soundService.isAudioEnabled());
+  const [musicEnabled, setMusicEnabled] = useState(soundService.isMusicEnabled());
 
   const handleColorSelect = (color: string) => {
     soundService.playClick();
@@ -92,15 +95,32 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
               <label className="sound-toggle">
                 <input
                   type="checkbox"
-                  checked={soundService.isAudioEnabled()}
+                  checked={soundEnabled}
                   onChange={(e) => {
-                    soundService.setEnabled(e.target.checked);
-                    if (e.target.checked) {
+                    const enabled = e.target.checked;
+                    soundService.setEnabled(enabled);
+                    setSoundEnabled(enabled);
+                    if (enabled) {
                       soundService.playClick();
                     }
                   }}
                 />
                 <span>Enable Sound Effects</span>
+              </label>
+              <label className="sound-toggle">
+                <input
+                  type="checkbox"
+                  checked={musicEnabled}
+                  onChange={(e) => {
+                    const enabled = e.target.checked;
+                    soundService.setMusicEnabled(enabled);
+                    setMusicEnabled(enabled);
+                    if (enabled) {
+                      soundService.startBackgroundMusic();
+                    }
+                  }}
+                />
+                <span>Enable Music</span>
               </label>
             </div>
           </div>
