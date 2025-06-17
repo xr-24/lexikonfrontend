@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useGameStore } from '../../src/store/gameStore';
 import { IntercessionsSelector } from '../ui/IntercessionsSelector';
 import { socket } from '../../src/services/socketService';
+import { soundService } from '../../src/services/soundService';
 import './Lobby.css';
 
 export const Lobby: React.FC = () => {
-  const { 
+  const {
     roomCode, 
     roomPlayers, 
     isHost, 
@@ -56,6 +57,7 @@ export const Lobby: React.FC = () => {
   const handleStartGame = () => {
     if (isHost && roomPlayers.length >= 2) {
       // Notify server to start the game; modal will open on server event
+      soundService.playMainClick();
       startGame();
     }
   };
@@ -66,6 +68,7 @@ export const Lobby: React.FC = () => {
 
   const copyRoomCode = async () => {
     if (roomCode) {
+      soundService.playMainClick();
       try {
         await navigator.clipboard.writeText(roomCode);
         // You could add a toast notification here
@@ -83,12 +86,27 @@ export const Lobby: React.FC = () => {
     }
   };
 
+  const handleLeaveRoom = () => {
+    soundService.playMainClick();
+    leaveRoom();
+  };
+
+  const handleAddAIPlayer = () => {
+    soundService.playMainClick();
+    addAIPlayer();
+  };
+
+  const handleRemoveAIPlayer = (id: string) => {
+    soundService.playMainClick();
+    removeAIPlayer(id);
+  };
+
   return (
     <div className="lobby">
       <div className="lobby-container">
         <div className="lobby-header">
           <h1>📜 Lexikon Lobby</h1>
-          <button className="leave-btn" onClick={leaveRoom}>
+          <button className="leave-btn" onClick={handleLeaveRoom}>
             ← Leave Room
           </button>
         </div>
@@ -111,7 +129,7 @@ export const Lobby: React.FC = () => {
             <div className="players-header">
               <h3>Players ({roomPlayers.length}/4)</h3>
               {isHost && roomPlayers.length < 4 && (
-                <button className="add-ai-btn" onClick={addAIPlayer} title="Add Demon Player">
+                <button className="add-ai-btn" onClick={handleAddAIPlayer} title="Add Demon Player">
                   ⛧ Add Demon
                 </button>
               )}
@@ -129,9 +147,9 @@ export const Lobby: React.FC = () => {
                       <div className="ai-controls">
                         <span className="status-indicator ai">⛧</span>
                         {isHost && (
-                          <button 
-                            className="remove-ai-btn" 
-                            onClick={() => removeAIPlayer(player.id)}
+                          <button
+                            className="remove-ai-btn"
+                            onClick={() => handleRemoveAIPlayer(player.id)}
                             title="Remove Demon Player"
                           >
                             ✕

@@ -2,7 +2,7 @@ class SoundService {
   private sounds: Map<string, HTMLAudioElement> = new Map();
   private backgroundMusic: HTMLAudioElement | null = null;
   private isEnabled: boolean = true;
-  private isMusicEnabled: boolean = true;
+  private musicEnabled: boolean = true;
 
   constructor() {
     this.preloadSounds();
@@ -173,7 +173,7 @@ class SoundService {
 
   // Background music controls
   startBackgroundMusic() {
-    if (!this.isMusicEnabled || !this.backgroundMusic) {
+    if (!this.musicEnabled || !this.backgroundMusic) {
       console.log('Background music not enabled or not loaded');
       return;
     }
@@ -194,10 +194,14 @@ class SoundService {
   }
 
   setMusicEnabled(enabled: boolean) {
-    this.isMusicEnabled = enabled;
+    this.musicEnabled = enabled;
     if (!enabled) {
       this.stopBackgroundMusic();
     }
+  }
+
+  isMusicEnabled(): boolean {
+    return this.musicEnabled;
   }
 
   isMusicPlaying(): boolean {
