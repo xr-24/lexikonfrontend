@@ -230,6 +230,11 @@ export const useGameStore = create<GameStore>((set, get) => {
     });
   });
 
+  socket.on('intercession-selection-start', () => {
+    set({ intercessionSelectionStarted: true });
+    // UI updates can be triggered here if needed
+  });
+
   socket.on('player-joined', (data: any) => {
     if (data.room) {
       set({
