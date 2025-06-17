@@ -30,7 +30,7 @@ export const Lobby: React.FC = () => {
     }
   }, [isSoloMode, isHost, roomPlayers.length, addAIPlayer]);
 
-  // Listen for intercession selection responses and ready-to-start events
+  // Listen for intercession selection responses, start events, and ready-to-start events
   useEffect(() => {
     const handleIntercessionsSelected = (data: any) => {
       console.log('Lobby: Intercessions selected response:', data);
@@ -38,6 +38,10 @@ export const Lobby: React.FC = () => {
         setShowIntercessionsSelector(false);
         // Don't start game immediately - wait for ready-to-start event
       }
+    };
+
+    const handleIntercessionSelectionStart = () => {
+      setShowIntercessionsSelector(true);
     };
 
     const handleReadyToStart = () => {
@@ -49,18 +53,19 @@ export const Lobby: React.FC = () => {
     };
 
     socket.on('intercessions-selected', handleIntercessionsSelected);
+    socket.on('intercession-selection-start', handleIntercessionSelectionStart);
     socket.on('ready-to-start', handleReadyToStart);
 
     return () => {
       socket.off('intercessions-selected', handleIntercessionsSelected);
+      socket.off('intercession-selection-start', handleIntercessionSelectionStart);
       socket.off('ready-to-start', handleReadyToStart);
     };
   }, [isHost, startGame]);
 
   const handleStartGame = () => {
     if (isHost && roomPlayers.length >= 2) {
-      // Show intercession selector first
-      setShowIntercessionsSelector(true);
+      // Host requests to start the game; server will trigger intercession-selection-start
     }
   };
 
