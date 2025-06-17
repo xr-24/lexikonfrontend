@@ -20,7 +20,6 @@ export const Lobby: React.FC = () => {
   } = useGameStore();
 
   const [showIntercessionsSelector, setShowIntercessionsSelector] = useState(false);
-  const [_hasSelectedIntercessions, _setHasSelectedIntercessions] = useState(false);
 
   // Auto-add 1 AI player for solo mode
   useEffect(() => {
@@ -30,37 +29,34 @@ export const Lobby: React.FC = () => {
     }
   }, [isSoloMode, isHost, roomPlayers.length, addAIPlayer]);
 
-  // Listen for intercession selection responses and ready-to-start events
+  // Listen for intercession selection responses and start events
   useEffect(() => {
     const handleIntercessionsSelected = (data: any) => {
       console.log('Lobby: Intercessions selected response:', data);
       if (data.success) {
         setShowIntercessionsSelector(false);
-        // Don't start game immediately - wait for ready-to-start event
+        // Modal will close when selection succeeds
       }
     };
 
-    const handleReadyToStart = () => {
-      console.log('Lobby: All players ready to start');
-      if (isHost) {
-        // All players have selected intercessions, start the game
-        startGame();
-      }
+    const handleIntercessionSelectionStart = () => {
+      console.log('Lobby: Intercession selection phase started');
+      setShowIntercessionsSelector(true);
     };
 
     socket.on('intercessions-selected', handleIntercessionsSelected);
-    socket.on('ready-to-start', handleReadyToStart);
+    socket.on('intercession-selection-start', handleIntercessionSelectionStart);
 
     return () => {
       socket.off('intercessions-selected', handleIntercessionsSelected);
-      socket.off('ready-to-start', handleReadyToStart);
+      socket.off('intercession-selection-start', handleIntercessionSelectionStart);
     };
-  }, [isHost, startGame]);
+  }, []);
 
   const handleStartGame = () => {
     if (isHost && roomPlayers.length >= 2) {
-      // Show intercession selector first
-      setShowIntercessionsSelector(true);
+      // Notify server to start the game; modal will open on server event
+      startGame();
     }
   };
 
